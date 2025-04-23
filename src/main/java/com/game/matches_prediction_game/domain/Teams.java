@@ -8,31 +8,30 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "SPORT")
-public class Sport {
-    @Schema(description = "Sport ID", name = "id", type = "Long")
+@Table(name = "TEAM")
+public class Teams {
+    @Schema(description = "Team ID", name = "id", type = "Long")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SPTID", nullable = false)
+    @Column(name = "TEAMID", nullable = false)
     private Long id;
-    @Schema(description = "Sports Name", name = "sport_name", type = "String")
-    @Column(name = "SPORT_NAME")
-    private String sport_name;
-    @Schema(description = "Divisions", name = "division", type = "Division")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sport")
-    private List<Division> divisions;
-
+    @Schema(description = "Team Name", name = "team_name", type = "String")
+    @Column(name = "TEAM_NAME")
+    private String team_name;
+    @Schema(description = "Division ", name = "division_id", type = "Long")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DIVSION_ID", referencedColumnName = "id")
+    private Division division;
 }

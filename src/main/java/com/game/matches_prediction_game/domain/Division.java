@@ -4,21 +4,26 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "Division")
+@Table(name = "DIVISION")
 public class Division {
     @Schema(description = "Division ID", name = "id", type = "Long")
     @Id
@@ -28,8 +33,14 @@ public class Division {
     @Schema(description = "Division Name", name = "division_name", type = "String")
     @Column(name = "DIVSION_NAME")
     private String division_name;
-    @Schema(description = "Sports Name", name = "sport_name", type = "String")
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "SPORT", referencedColumnName = "id")
-    private Sport sport_name;
+    @Schema(description = "Sports Name", name = "sport_id", type = "String")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SPORT_ID", referencedColumnName = "id")
+    private Sport sport;
+    @Schema(description = "Leagues", name = "league", type = "Leagues")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "division")
+    private List<Leagues> leagues;
+    @Schema(description = "Teams", name = "teams", type = "Teams")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "division")
+    private List<Teams> teams;
 }
