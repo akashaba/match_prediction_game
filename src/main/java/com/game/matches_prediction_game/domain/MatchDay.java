@@ -21,8 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "MATCHES")
-public class Match_Day {
+@Table(name = "MATCHDAY")
+public class MatchDay {
     @Schema(description = "Match Day ID", name = "id", type = "Long")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

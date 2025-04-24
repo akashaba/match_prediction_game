@@ -40,7 +40,7 @@ public class Users {
     private String role;
     @Schema(description = "League", name = "league_id", type = "Long")
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "LEAGUE_ID", referencedColumnName = "id")
+    @JoinColumn(name = "LEAGUE_ID", referencedColumnName = "LEAGID")
     private Leagues league_id;
     @Schema(description = "Points", name = "points", type = "Integer")
     @Column(name = "POINTS")

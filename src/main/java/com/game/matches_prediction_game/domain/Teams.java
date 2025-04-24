@@ -32,6 +32,6 @@ public class Teams {
     private String team_name;
     @Schema(description = "Division ", name = "division_id", type = "Long")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DIVSION_ID", referencedColumnName = "id")
+    @JoinColumn(name = "DIVSION_ID", referencedColumnName = "DIVID")
     private Division division;
 }

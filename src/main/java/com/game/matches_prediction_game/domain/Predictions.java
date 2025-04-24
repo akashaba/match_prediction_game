@@ -29,7 +29,7 @@ public class Predictions {
     private Long id;
     @Schema(description = "Match", name = "match", type = "Matches")
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "matchId", referencedColumnName = "id")
+    @JoinColumn(name = "matchId", referencedColumnName = "MATCHID")
     private Matches match;
     @Schema(description = "Home", name = "home", type = "Integer")
     @Column(name = "HOME")

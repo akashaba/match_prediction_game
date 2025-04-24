@@ -1,5 +1,6 @@
 package com.game.matches_prediction_game.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,6 +15,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -30,9 +32,10 @@ public class Sport {
     private Long id;
     @Schema(description = "Sports Name", name = "sport_name", type = "String")
     @Column(name = "SPORT_NAME")
-    private String sport_name;
+    private String sportName;
+    @ToString.Exclude
     @Schema(description = "Divisions", name = "division", type = "Division")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sport")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sport")
+    @JsonIgnore
     private List<Division> divisions;
-
 }

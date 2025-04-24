@@ -35,7 +35,7 @@ public class Division {
     private String division_name;
     @Schema(description = "Sports Name", name = "sport_id", type = "String")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SPORT_ID", referencedColumnName = "id")
+    @JoinColumn(name = "SPORT_ID", referencedColumnName = "SPTID")
     private Sport sport;
     @Schema(description = "Leagues", name = "league", type = "Leagues")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "division")

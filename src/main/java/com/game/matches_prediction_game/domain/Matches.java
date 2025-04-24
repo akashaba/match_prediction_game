@@ -29,14 +29,14 @@ public class Matches {
     private Long id;
     @Schema(description = "Home Team", name = "awayTeamId", type = "Teams")
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "HOME_TEAM_ID", referencedColumnName = "id")
+    @JoinColumn(name = "HOME_TEAM_ID", referencedColumnName = "TEAMID")
     private Teams homeTeamId;
     @Schema(description = "Away Team", name = "awayTeamId", type = "Teams")
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "AWAY_TEAM_ID", referencedColumnName = "id")
+    @JoinColumn(name = "AWAY_TEAM_ID", referencedColumnName = "TEAMID")
     private Teams awayTeamId;
     @Schema(description = "Match Day", name = "matchDay", type = "MatchDay")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "matchDayId")
-    private Match_Day matchDay;
+    @JoinColumn(name = "matchDayId", referencedColumnName = "MATDAYID")
+    private MatchDay matchDay;
 }
