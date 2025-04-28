@@ -32,9 +32,9 @@ public class Division {
     private Long id;
     @Schema(description = "Division Name", name = "division_name", type = "String")
     @Column(name = "DIVSION_NAME")
-    private String division_name;
+    private String divisionName;
     @Schema(description = "Sports Name", name = "sport_id", type = "String")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "SPORT_ID", referencedColumnName = "SPTID")
     private Sport sport;
     @Schema(description = "Leagues", name = "league", type = "Leagues")

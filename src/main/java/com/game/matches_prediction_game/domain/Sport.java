@@ -33,9 +33,8 @@ public class Sport {
     @Schema(description = "Sports Name", name = "sport_name", type = "String")
     @Column(name = "SPORT_NAME")
     private String sportName;
-    @ToString.Exclude
     @Schema(description = "Divisions", name = "division", type = "Division")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sport")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sport")
     @JsonIgnore
     private List<Division> divisions;
 }
