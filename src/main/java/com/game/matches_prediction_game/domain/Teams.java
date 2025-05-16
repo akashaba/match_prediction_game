@@ -20,18 +20,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "TEAM")
+@Table(name = "TEAMS")
 public class Teams {
     @Schema(description = "Team ID", name = "id", type = "Long")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TEAMID", nullable = false)
     private Long id;
+
     @Schema(description = "Team Name", name = "team_name", type = "String")
-    @Column(name = "TEAM_NAME")
-    private String team_name;
-    @Schema(description = "Division ", name = "division_id", type = "Long")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DIVSION_ID", referencedColumnName = "DIVID")
+    @Column(name = "TEAM_NAME", nullable = false)
+    private String teamName;
+
+    @Schema(description = "Division", name = "division_id", type = "Long")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "DIVSION_ID", referencedColumnName = "DIVID", nullable = false)
     private Division division;
 }

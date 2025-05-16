@@ -8,11 +8,13 @@ services:
       MYSQL_USER: appuser
       MYSQL_PASSWORD: appuserpassword
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
       - ./mysql-init:/docker-entrypoint-initdb.d
     restart: unless-stopped
+    networks:
+      - mysql-net
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -21,3 +23,6 @@ services:
 
 volumes:
   mysql-data:
+
+networks:
+  mysql-net:

@@ -16,25 +16,41 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.security.SecureRandom;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "LEAUGE")
+@Table(name = "LEAGUE")
 public class Leagues {
     @Schema(description = "League ID", name = "id", type = "Long")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "LEAGID", nullable = false)
     private Long id;
+
     @Schema(description = "League Name", name = "league_name", type = "String")
-    @Column(name = "LEAGUE_NAME")
-    private String league_name;
+    @Column(name = "LEAGUE_NAME", nullable = false)
+    private String leagueName;
+
     @Schema(description = "League Code", name = "league_code", type = "String")
-    @Column(name = "LEAGUE_CODE")
-    private String league_code;
-    @Schema(description = "Division ", name = "division_id", type = "Long")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "LEAGUE_CODE", nullable = false, unique = true)
+    private String leagueCode;
+
+    @Schema(description = "Division", name = "division_id", type = "Long")
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "DIVSION_ID", referencedColumnName = "DIVID")
     private Division division;
+
+    // Generate a 6-character alphanumeric code
+    public static String generateLeagueCode() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        SecureRandom random = new SecureRandom();
+        StringBuilder code = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            code.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        return code.toString();
+    }
 }

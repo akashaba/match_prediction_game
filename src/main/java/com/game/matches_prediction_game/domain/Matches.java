@@ -1,5 +1,6 @@
 package com.game.matches_prediction_game.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -27,16 +28,20 @@ public class Matches {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MATCHID", nullable = false)
     private Long id;
-    @Schema(description = "Home Team", name = "awayTeamId", type = "Teams")
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "HOME_TEAM_ID", referencedColumnName = "TEAMID")
-    private Teams homeTeamId;
-    @Schema(description = "Away Team", name = "awayTeamId", type = "Teams")
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "AWAY_TEAM_ID", referencedColumnName = "TEAMID")
-    private Teams awayTeamId;
+
+    @Schema(description = "Home Team", name = "homeTeam", type = "Teams")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "HOME_TEAM_ID", referencedColumnName = "TEAMID", nullable = false)
+    private Teams homeTeam;
+
+    @Schema(description = "Away Team", name = "awayTeam", type = "Teams")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "AWAY_TEAM_ID", referencedColumnName = "TEAMID", nullable = false)
+    private Teams awayTeam;
+
     @Schema(description = "Match Day", name = "matchDay", type = "MatchDay")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "matchDayId", referencedColumnName = "MATDAYID")
+    @JoinColumn(name = "MATCHDAYID", referencedColumnName = "MATDAYID", nullable = false)
+    @JsonIgnore
     private MatchDay matchDay;
 }

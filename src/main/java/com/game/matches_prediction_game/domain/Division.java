@@ -1,5 +1,6 @@
 package com.game.matches_prediction_game.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -39,8 +40,10 @@ public class Division {
     private Sport sport;
     @Schema(description = "Leagues", name = "league", type = "Leagues")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "division")
+    @JsonIgnore
     private List<Leagues> leagues;
     @Schema(description = "Teams", name = "teams", type = "Teams")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "division")
+    @JsonIgnore
     private List<Teams> teams;
 }
